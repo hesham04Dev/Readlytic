@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../db/db.dart';
 
-class HabitProvider with ChangeNotifier {
-  HabitProvider() {
-    _Habits = db.sql.habits.get();
+class BooksProvider with ChangeNotifier {
+  BooksProvider() {
+    _books = db.sql.books.get();
   }
   newHabit() {
-    _Habits = db.sql.habits.get();
+    _books = db.sql.books.get();
     notifyListeners();
   }
 
   habitUpdated() {
-    _Habits = db.sql.habits.get();
+    _books = db.sql.books.get();
     notifyListeners();
   }
 
-  var _Habits;
-  get Habits => _Habits;
+  var _books;
+  get books => _books;
 }

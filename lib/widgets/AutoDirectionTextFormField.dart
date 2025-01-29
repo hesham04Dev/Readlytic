@@ -1,7 +1,7 @@
-import 'package:achivement_box/models/PrimaryContainer.dart';
 import 'package:flutter/material.dart';
 
 import 'AutoDirection.dart';
+import 'PrimaryContainer.dart';
 
 class AutoDirectionTextFormField extends StatefulWidget {
   final TextEditingController controller;

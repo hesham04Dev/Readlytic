@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../AddNewPages/newGift.dart';
-import '../../AddNewPages/newHabit.dart';
+import '../../NewBook/new_book.dart';
 import '../Bodies/providers/pageIndexProvider.dart';
 
 class MyFab extends StatelessWidget {
@@ -21,7 +20,7 @@ class MyFab extends StatelessWidget {
               borderRadius: BorderRadius.circular(50)),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (_) {
-              return pageIndex != 2 ? NewHabitPage() : NewGiftPage();
+              return const NewBook();
             }));
           },
           child: const Icon(

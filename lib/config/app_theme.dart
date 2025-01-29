@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../db/db.dart';
-import '../output/generated/colors.dart';
 import 'const.dart';
 
-ThemeData buildTheme(Color accentColor, bool isDark) {
+ThemeData buildTheme(MaterialColor accentColor, bool isDark) {
   final ThemeData base = isDark ? ThemeData.dark() : ThemeData.light();
   Color backgroundColor = isDark ? kDarkGrey : kWhite;
   Color primaryColor = accentColor;
   print(primaryColor);
   final swatch = ColorScheme.fromSwatch(
-      primarySwatch: colors[db.sql.settings.getAccentColorIndex()],
+      primarySwatch: accentColor,
       brightness: isDark ? Brightness.dark : Brightness.light);
   return base.copyWith(
     tabBarTheme: const TabBarTheme(dividerColor: Colors.transparent),
