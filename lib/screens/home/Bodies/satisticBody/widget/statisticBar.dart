@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+
+import '../../../../../widgets/PrimaryContainer.dart';
+
+class StatisticBar extends StatelessWidget {
+  const StatisticBar(
+      {super.key,
+      required this.statisticName,
+      required this.valueName,
+      this.icon});
+  final String statisticName;
+  final String valueName;
+  final Widget? icon;
+  @override
+  Widget build(BuildContext context) {
+    return PrimaryContainer(
+        opacity: 0.1,
+        padding: 14,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("$statisticName:\t $valueName"),
+            icon ?? const SizedBox()
+          ],
+        ));
+  }
+}
