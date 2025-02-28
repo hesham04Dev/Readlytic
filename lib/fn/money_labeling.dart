@@ -1,4 +1,4 @@
-String labelMoney(int money) {
+String labelMoney(num money) {
   bool isNegative = false;
   if (money < 0) {
     isNegative = true;

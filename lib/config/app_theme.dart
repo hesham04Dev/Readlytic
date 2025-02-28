@@ -1,17 +1,22 @@
+import 'package:asset_icon/asset_icon.dart';
 import 'package:flutter/material.dart';
 
+import '../db/db.dart';
+import '../output/generated/colors.dart';
 import 'const.dart';
 
-ThemeData buildTheme(MaterialColor accentColor, bool isDark) {
+ThemeData buildTheme(Color accentColor, bool isDark) {
+  AssetIcon.settings(defaultColor: accentColor);
   final ThemeData base = isDark ? ThemeData.dark() : ThemeData.light();
   Color backgroundColor = isDark ? kDarkGrey : kWhite;
   Color primaryColor = accentColor;
   print(primaryColor);
   final swatch = ColorScheme.fromSwatch(
-      primarySwatch: accentColor,
+      primarySwatch: colors[db.sql.settings.getAccentColorIndex()],
       brightness: isDark ? Brightness.dark : Brightness.light);
   return base.copyWith(
     tabBarTheme: const TabBarTheme(dividerColor: Colors.transparent),
+
     dropdownMenuTheme: DropdownMenuThemeData(
         menuStyle: MenuStyle(
             alignment: const Alignment(-1, 1.3),
@@ -60,11 +65,12 @@ ThemeData buildTheme(MaterialColor accentColor, bool isDark) {
     scaffoldBackgroundColor: isDark ? kDarkGrey : kWhite,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
         shape: const CircleBorder(),
-        backgroundColor: swatch.primary.withOpacity(0.9),
-        elevation: 0,
+        backgroundColor: isDark ? kDarkGrey : kWhite,
+        
+        elevation: 1,
         hoverElevation: 0),
     iconTheme: IconThemeData(
-      color: swatch.primary,
+      color: accentColor,
     ),
     colorScheme: swatch,
     appBarTheme: AppBarTheme(
@@ -111,6 +117,7 @@ TextTheme _buildTextTheme(TextTheme base, Color color) {
         fontWeight: FontWeight.bold,
         fontFamily: "Dubai"),
   );
+
 }
 
 TextSelectionThemeData _buildTextSelectionTheme(
