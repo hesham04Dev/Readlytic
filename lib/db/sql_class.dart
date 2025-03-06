@@ -2,8 +2,8 @@
 import 'package:intl/intl.dart';
 import 'package:sqlite3/sqlite3.dart';
 
-import '../models/Category.dart';
-import '../models/book.dart';
+
+import '../widgets/book.dart';
 import 'db.dart';
 
 final DateTime now = DateTime.now();
@@ -96,16 +96,17 @@ class BookFn {
     return x;
 
   }
-  getAverageReadingTime() {
+ num getAverageReadingTime() {
     var x = _db.select('''
     SELECT AVG(reading_time) AS Average
     FROM reading_logs
     Group BY date
     Limit 7;
     ''');
+    if(x.isEmpty) return 0;
     return x[0]['Average']??0;
   }
-  ResultSet getTopDay() {
+  ResultSet? getTopDay() {
     ResultSet x = _db.select('''
 SELECT DATE(date) as date, SUM(reading_time) AS Total
 FROM books AS b
@@ -118,8 +119,14 @@ LIMIT 1;
     return x;
   }
 
- getLogByDate(date){}
- getDatesOfLog(){}
+ getLogByDate(date){
+  return _db.select(
+        "select  rl.*,b.name from reading_logs rl inner join books b on rl.book_id = b.id where date = ?",[date]);
+ }
+ getDatesOfLog(){
+  return _db.select(
+        "select distinct date from reading_logs order by date desc ");
+ }
 }
 
 class StatusFn {

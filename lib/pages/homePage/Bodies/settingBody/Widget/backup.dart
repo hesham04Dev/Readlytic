@@ -4,8 +4,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+
+import '../../../../../config/const.dart';
 import '../../../../../fn/restoreDB.dart';
-import '../../../../../models/imageIcon.dart';
+import '../../../../../widgets/imageIcon.dart';
 import 'MyListTile.dart';
 
 class BackupTile extends StatelessWidget {
@@ -19,7 +21,7 @@ class BackupTile extends StatelessWidget {
         builder: (context) => const Dialog(
           child: Padding(
             padding: EdgeInsets.all(20.0),
-            child: Text("the database copied to Downloads/achievement_box"),
+            child: Text("the database copied to Downloads/$kAppName"),
           ),
         ),
       );

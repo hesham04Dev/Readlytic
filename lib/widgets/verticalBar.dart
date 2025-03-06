@@ -27,8 +27,8 @@ class VerticalBar extends StatelessWidget {
           text,
           maxLines: 2,
           textAlign: TextAlign.center,
-          maxFontSize: 12,
-          minFontSize: 9,
+          maxFontSize: 11,
+          minFontSize: 7,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:readlytic/config/const.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 import 'sql_class.dart';
@@ -14,7 +15,7 @@ class DbHelper {
 
   Future<void> openDb() async {
     final dir = await _supportDir;
-    dbPath = "${dir.path}/hcody_redalytic2.db";
+    dbPath = "${dir.path}/hcody_$kAppName.db";
     print(dbPath);
     _restoreIfExists();
     db = sqlite3.open(dbPath);
@@ -97,7 +98,7 @@ class DbHelper {
   )''';
     const String createStatusTable = '''
             CREATE TABLE  IF NOT EXISTS status (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE);
-            INSERT OR IGNORE INTO status (name) VALUES ('Completed'), ('Reading'), ('Stopped'), ('Later');
+            INSERT OR IGNORE INTO status (name) VALUES ('Reading'), ('Stopped'), ('Completed'), ('Later');
             ''';
     const String createBookTable = '''
             CREATE TABLE IF NOT EXISTS  books (id INTEGER PRIMARY KEY AUTOINCREMENT,

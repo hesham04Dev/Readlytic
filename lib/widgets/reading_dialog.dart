@@ -37,7 +37,10 @@ class ReadingDialog extends StatelessWidget {
                 width: 200,
                 child: pagesField,
               ),
-              FilledButton(
+              // Timer
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [ FilledButton(
                   onPressed: () {
                     print("current time in timer is:${timer.getTime()}");
 
@@ -53,8 +56,11 @@ class ReadingDialog extends StatelessWidget {
                     }
 
                   },
-                  child: Text("close"))
-              // Timer
+                  child: Text("close")),
+                  TextButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, child: Text("cancel",style: TextStyle(color: Colors.red),))
+             ],),
               // readpages
               // close btn
             ],

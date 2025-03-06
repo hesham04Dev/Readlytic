@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/PrimaryContainer.dart';
+import '../../../../../widgets/PrimaryContainer.dart';
 
 class StatisticBar extends StatelessWidget {
   const StatisticBar(

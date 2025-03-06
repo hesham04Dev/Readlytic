@@ -2,7 +2,7 @@ name: readlytic
 description: A powerful application designed to help you in reading.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 0.7.0+1
 
 environment:
   sdk: '^3.6.0'
@@ -33,6 +33,10 @@ dependencies:
   localization_lite: ^1.0.7
   package_info_plus: ^8.1.1
   asset_icon: ^1.0.4
+  #
+  audioplayers: ^6.2.0
+  just_audio: ^0.9.46
+  video_player: ^2.9.3
 
 dev_dependencies:
   flutter_test:
@@ -44,6 +48,7 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/icons/book.svg
 
   fonts:
     - family: Dubai

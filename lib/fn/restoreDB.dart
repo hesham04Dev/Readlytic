@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:readlytic/config/const.dart';
 import 'package:restart_app/restart_app.dart';
 
 Future<void> backup() async {
@@ -13,13 +14,14 @@ Future<void> backup() async {
     pathToDownloadsDir = downloadsDir!.path;
   }
   String date = DateFormat('yyyy_MM_dd_kk_mm').format(DateTime.now());
-  Directory folder = Directory("$pathToDownloadsDir/achievement_box/");
+  String path  = "$pathToDownloadsDir/$kAppName/";
+  Directory folder = Directory(path);
   bool isFolderExists = await folder.exists();
   if (!isFolderExists) {
     folder.create();
   }
   String backupPath =
-      "$pathToDownloadsDir/achievement_box/hcody_ab_backup$date.db";
+      "$path/hcody_${kAppName}_backup$date.db";
   File file = File(backupPath);
   if (await file.exists()) {
     await file.delete();
@@ -28,10 +30,10 @@ Future<void> backup() async {
   //db.backup(backup, nPage: -1);
   //backup.dispose();
   File originalFile =
-      File("${(await getApplicationSupportDirectory()).path}/hcody_ab.db");
+      File("${(await getApplicationSupportDirectory()).path}/$kAppName.db");
 
   originalFile
-      .copy("$pathToDownloadsDir/achievement_box/hcody_ab_backup$date.db");
+      .copy("$pathToDownloadsDir/achievement_box/${kAppName}_backup$date.db");
 }
 
 Future<void> restore(String path) async {

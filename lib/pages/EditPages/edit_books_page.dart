@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:readlytic/config/const.dart';
+import 'package:readlytic/pages/AddNewPages/widget/status_drop_dwon.dart';
 
 import '../../db/db.dart';
 
-import '../../models/book.dart';
-import '../../models/reading_dialog.dart';
+import '../../widgets/book.dart';
+import '../../widgets/reading_dialog.dart';
 import '../../rootProvider/bookProvider.dart';
 import '../AddNewPages/new_book.dart';
 
@@ -34,25 +36,21 @@ class _EditBookPageState extends NewBookPageState {
     super.totalPages.text =  book.totalPages.toString();
     super.author.text = book.author;
     super.categories.text = book.categories;
-    super.status.text = db.sql.statuses.getById(book.statusId)['name'].toString(); // check if it correct
+    // super.status.text = db.sql.statuses.getById(book.statusId)['name'].toString(); // check if it correct
     super.notes.text = book.notes;
     super.averageReadingTime.text = book.averageReadingTime.toString();
 
-    // super.category.text =
-    //     "${db.sql.categories.getById(habit.categoryId)['Name']}";
-    super.statusDropDown.selectedId = book.statusId;
-  //   super.statusDropDown = CategoryDropDown(
-  //   controller: super.status,
-
-  // );
-  print("status id ${book.statusId}");
-  print("status name ${super.status.text}");
-    // TODO dropdown dont take the val
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> actions = [];
+      setState(() {
+    super.statusDropDown = StatusDropDown(
+      // controller: super.status,
+      selectedId: book.statusId,
+    );
+  });
 
       actions = [
         // Padding(
@@ -105,14 +103,16 @@ class _EditBookPageState extends NewBookPageState {
   @override
   void save(BuildContext context) {
     if (super.formKey.currentState!.validate()) {
+      print(super.statusDropDown.selectedId);
+      print(55);
       Book b = Book(
         id: book.id,
         title: super.title.text,
         statusId: super.statusDropDown.selectedId,
 
-        currentPage: int.parse(super.currentPage.text),
+        currentPage: int.tryParse(super.currentPage.text)??0,
         totalPages: int.parse(super.totalPages.text),
-        averageReadingTime: double.parse(super.averageReadingTime.text), author: super.author.text,
+        averageReadingTime: double.tryParse(super.averageReadingTime.text)??kDefaultAvgReadingTime, author: super.author.text,
         rating: 0,//TODO
         categories: super.categories.text,
         notes: super.notes.text,
@@ -127,6 +127,3 @@ class _EditBookPageState extends NewBookPageState {
     }
   }
 }
-
-// TODO Add the timer box
-

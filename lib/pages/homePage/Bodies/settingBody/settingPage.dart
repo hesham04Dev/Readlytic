@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:readlytic/pages/homePage/Bodies/settingBody/Widget/ColorDialog.dart';
 
 import '../../../../db/db.dart';
-import '../../../../models/imageIcon.dart';
-import '../../../../models/mySwitchTile.dart';
+import '../../../../widgets/imageIcon.dart';
+import '../../../../widgets/mySwitchTile.dart';
 import '../../../../rootProvider/ThemeProvider.dart';
 import '../../../../rootProvider/settings_controller.dart';
 import '../../../logPage/log_page.dart';
@@ -57,7 +57,7 @@ class _SettingBodyState extends State<SettingBody> {
             ),
             onTap: () async {
               await Clipboard.setData(const ClipboardData(
-                  text: "https://github.com/hesham04Dev/AcivementBox"));
+                  text: "https://github.com/hesham04Dev/Readlytic"));
             },
           ),
           // MyListTile(

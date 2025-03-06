@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sqlite3/sqlite3.dart' as sqlite;
 
-import '../../../models/PrimaryContainer.dart';
+import '../../../widgets/PrimaryContainer.dart';
 import '../models/log.dart';
 
 class LogContainer extends StatelessWidget {

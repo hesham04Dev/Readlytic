@@ -8,14 +8,15 @@ class AutoDirectionTextFormField extends StatefulWidget {
 
   final String errMessage;
   final String hintText;
-
   final int? maxLines;
+  final bool showLabel;
 
   const AutoDirectionTextFormField(
       {super.key,
       required this.controller,
-      required this.errMessage,
+      this.errMessage = "",
       required this.hintText,
+      this.showLabel=false,
       this.maxLines = 1});
 
   @override
@@ -35,18 +36,23 @@ class _AutoDirectionTextFormFieldState
             ? widget.controller.text[0]
             : widget.controller.text,
         child: TextFormField(
+          
           maxLines: widget.maxLines,
           controller: widget.controller,
           onChanged: (value) {
             setState(() {});
           },
           validator: (value) {
+            if (widget.errMessage.isEmpty) {
+              return null;
+            }
             if (value == null || value.isEmpty) {
               return widget.errMessage;
             }
             return null;
           },
           decoration: InputDecoration(
+              label: widget.showLabel? Text(widget.hintText):null,
               hintText: widget.hintText, border: InputBorder.none),
         ),
       ),

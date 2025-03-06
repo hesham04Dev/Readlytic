@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../models/imageIcon.dart';
+import '../../../widgets/imageIcon.dart';
 import '../../../../rootProvider/ThemeProvider.dart';
 import '../Bodies/providers/pageIndexProvider.dart';
 

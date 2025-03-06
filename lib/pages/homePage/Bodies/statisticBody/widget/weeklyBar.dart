@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../../config/styles.dart';
 import '../../../../../db/db.dart';
-import '../../../../../fn/money_labeling.dart';
+
 import '../../../../../fn/time_lable.dart';
-import '../../../../../models/PrimaryContainer.dart';
-import '../../../../../models/verticalBar.dart';
+import '../../../../../widgets/PrimaryContainer.dart';
+import '../../../../../widgets/verticalBar.dart';
 
 class WeeklyBar extends StatelessWidget {
   const WeeklyBar({super.key});
@@ -29,15 +29,16 @@ class WeeklyBar extends StatelessWidget {
   print("max value is :$maxValue");
 
       return PrimaryContainer(
+        padding: 0,
         opacity: 0.1,
         child: Column(
           children: [
-            Text(
-              "Coins bar",
-              style: titleStyle(context),
-            ),
+            // Text(
+            //   "Coins bar",
+            //   style: titleStyle(context),
+            // ),
             SizedBox(
-              height: 200,
+              height: 210,
               child: ListView(
                   // physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,

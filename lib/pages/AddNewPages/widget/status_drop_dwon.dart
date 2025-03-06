@@ -2,56 +2,87 @@ import 'package:flutter/material.dart';
 import 'package:sqlite3/common.dart';
 
 import '../../../db/db.dart';
-import '../../../models/PrimaryContainer.dart';
+import '../../../widgets/PrimaryContainer.dart';
 
-
-// ignore: must_be_immutable
 class StatusDropDown extends StatefulWidget {
-  final TextEditingController controller;
-  StatusDropDown({super.key, required this.controller, this.selectedId=0});
   int selectedId;
+  StatusDropDown({super.key, this.selectedId = 0});
 
   @override
   State<StatusDropDown> createState() => _StatusDropDownState();
 }
 
 class _StatusDropDownState extends State<StatusDropDown> {
+  // late int selectedId;
+  List<DropdownMenuItem<int>> statusList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    
+    _loadStatuses();
+  }
+
+  void _loadStatuses() {
+    ResultSet result = db.sql.statuses.get();
+    
+    if (result.isEmpty) return; // Ensure there's data
+
+    statusList = result.map((row) {
+      return DropdownMenuItem<int>(value: row['id'], child: Text(row["name"]),);
+    }).toList();
+
+    // Set default selected ID if it's 0 or not found in the list
+    widget.selectedId = result.any((row) => row['id'] == widget.selectedId)
+        ? widget.selectedId
+        : result[0]['id'];
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuEntry> statusList = [];
-    ResultSet result = db.sql.statuses.get();
-    if(widget.selectedId == 0){
-      widget.selectedId = result[0]['id'];
-      widget.controller.text = result[0]['name'];
-    }else{
-      widget.controller.text = result.firstWhere((element) => element['id'] == widget.selectedId)['name'];
-    }
-    for (var row in result) {
-      statusList.add(DropdownMenuEntry(value: row['id'], label: row['name']));
-    }
     return PrimaryContainer(
       padding: 0,
-      width: 150,
+      width: 130,
       height: 50,
       paddingHorizontal: 10,
-      child: DropdownMenu(
-          width: 130,
-          controller: widget.controller,
-          onSelected: (value) {
-            widget.selectedId = value;
+      child: DropdownButton<int>(
+        value: widget.selectedId,
+        hint:  const Text(
+          "Status",
+          style: TextStyle(fontSize: 14),
+        ),
+        // width: 130,
+        // controller: widget.controller,
+        onChanged: (value) {
+          if (value != null) {
             setState(() {
-              
+              widget.selectedId = value;
+              // widget.controller.text = statusList
+              //     .firstWhere((entry) => entry.value == value)
+              //     .key;
             });
-          },
-          inputDecorationTheme: const InputDecorationTheme(
-            border: InputBorder.none,
-          ),
-          hintText: "Status",
-          label: const Text(
-            "Status",
-            style: TextStyle(fontSize: 14),
-          ),
-          dropdownMenuEntries: statusList),
+          }
+        },
+        // inputDecorationTheme: const InputDecorationTheme(
+        //   border: InputBorder.none,
+        // ),
+        // hintText: "Status",
+        // label: const Text(
+        //   "Status",
+        //   style: TextStyle(fontSize: 14),
+        // ),
+        // dropdownMenuEntries: statusList,
+        borderRadius: BorderRadius.circular(25),
+        elevation: 0,
+        underline: const SizedBox(),
+        focusColor: Colors.transparent,
+        items: statusList,
+        
+      ),
     );
   }
+ 
+
 }

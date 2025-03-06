@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../fn/restoreDB.dart';
-import '../../../../../models/imageIcon.dart';
+import '../../../../../widgets/imageIcon.dart';
 import 'MyListTile.dart';
 
 class RestoreTile extends StatelessWidget {

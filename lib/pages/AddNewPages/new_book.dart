@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../config/const.dart';
 import '../../db/db.dart';
-import '../../models/AutoDirectionTextFormField.dart';
-import '../../models/book.dart';
+import '../../widgets/AutoDirectionTextFormField.dart';
+import '../../widgets/book.dart';
 import '../../rootProvider/bookProvider.dart';
 import 'widget/NumericField.dart';
 import 'widget/status_drop_dwon.dart';
-
 
 // ignore: must_be_immutable
 class NewBookPage extends StatefulWidget {
@@ -28,7 +28,7 @@ class NewBookPageState extends State<NewBookPage> {
   late final TextEditingController totalPages;
   late final TextEditingController author;
   late final TextEditingController categories;
-  late final TextEditingController status;
+  // late final TextEditingController status;
   late final TextEditingController notes;
   late final TextEditingController averageReadingTime;
   late final GlobalKey<FormState> formKey;
@@ -39,21 +39,21 @@ class NewBookPageState extends State<NewBookPage> {
 
   void save(BuildContext context) {
     if (formKey.currentState!.validate()) {
-
       Book newBook = Book(
         id: 0,
         title: title.text,
         author: author.text,
         totalPages: int.tryParse(totalPages.text) ?? 0,
         currentPage: int.tryParse(currentPage.text) ?? 0,
-        averageReadingTime: double.tryParse(averageReadingTime.text) ?? 0,
+        averageReadingTime:
+            double.tryParse(averageReadingTime.text) ?? kDefaultAvgReadingTime,
         rating: 0,
         categories: categories.text,
         statusId: statusDropDown.selectedId,
         notes: notes.text,
         readingCount: 0,
-        );
-        db.sql.books.add(newBook);
+      );
+      db.sql.books.add(newBook);
       // db.sql.books.add(
       //     name: name.text,
       //     categoryId: categoryDropDown.selectedId,
@@ -78,19 +78,17 @@ class NewBookPageState extends State<NewBookPage> {
     categories = TextEditingController();
 
     author = TextEditingController();
-    status = TextEditingController();
+    // status = TextEditingController();
     notes = TextEditingController();
     averageReadingTime = TextEditingController();
     formKey = GlobalKey<FormState>();
 
-    statusDropDown = StatusDropDown(
-      controller: status,
-    );
+    statusDropDown = StatusDropDown();
 
-     // Listen to totalPages and update currentPage field when it changes
-  totalPages.addListener(() {
-    setState(() {}); 
-  });
+    // Listen to totalPages and update currentPage field when it changes
+    totalPages.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -113,36 +111,58 @@ class NewBookPageState extends State<NewBookPage> {
                       height: 10,
                     ),
                     AutoDirectionTextFormField(
+                        showLabel: true,
                         controller: title,
                         errMessage: "please enter a title",
                         hintText: "title"),
                     AutoDirectionTextFormField(
+                        showLabel: true,
                         controller: author,
-                        errMessage: "please enter an author",
                         hintText: "author"),
                     AutoDirectionTextFormField(
+                        showLabel: true,
                         controller: categories,
-                        errMessage: "please enter the categories",
                         hintText: "categories"),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: NumericField(
+                            showLabel: true,
+                            controller: averageReadingTime,
+                            hintText: "avg min/page",
+                            maxValue: 100000,
+                            validate: false,
+                          ),
+                        ),
+                        statusDropDown,
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: NumericField(
+                            showLabel: true,
+                            controller: totalPages,
+                            hintText: "total Pages",
+                            maxValue: 100000,
+                          ),
+                        ),
+                        Expanded(
+                          child: NumericField(
+                            showLabel: true,
+                            controller: currentPage,
+                            hintText: "current page",
+                            validate: false,
+                            maxValue: int.tryParse(totalPages.text) ?? 0,
+                          ),
+                        ),
+                      ],
+                    ),
                     AutoDirectionTextFormField(
-                        controller: notes,
-                        errMessage: "please enter your note",
-                        hintText: "notes"),
-                    statusDropDown,
-                    NumericField(
-                      controller: averageReadingTime,
-                      hintText: "Average Reading Time",
-                      maxValue: 100000,
-                    ),
-                    NumericField(
-                      controller: totalPages,
-                      hintText: "total Pages",
-                      maxValue: 100000,
-                    ),
-                    NumericField(
-                      controller: currentPage,
-                      hintText: "current page",
-                      maxValue: int.tryParse(totalPages.text) ?? 0,
+                      showLabel: true,
+                      controller: notes,
+                      hintText: "notes",
+                      maxLines: 3,
                     ),
                     ...?children,
                     const SizedBox(
@@ -170,7 +190,7 @@ class NewBookPageState extends State<NewBookPage> {
     totalPages.dispose();
     author.dispose();
     categories.dispose();
-    status.dispose();
+    // status.dispose();
     notes.dispose();
     averageReadingTime.dispose();
     super.dispose();

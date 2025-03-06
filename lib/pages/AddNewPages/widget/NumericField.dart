@@ -1,19 +1,22 @@
-
 import 'package:flutter/material.dart';
 
-import '../../../models/PrimaryContainer.dart';
+import '../../../widgets/PrimaryContainer.dart';
 
 class NumericField extends StatelessWidget {
   const NumericField(
       {super.key,
       this.controller,
       this.onChanged,
+      this.validate = true,
+      this.showLabel = false,
       required this.hintText,
       required this.maxValue});
   final TextEditingController? controller;
   final int maxValue;
   final Function(String)? onChanged;
   final String hintText;
+  final bool validate;
+  final bool showLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +27,9 @@ class NumericField extends StatelessWidget {
         controller: controller,
         keyboardType: const TextInputType.numberWithOptions(),
         validator: (value) {
-          int val = int.tryParse(value ?? "0")??0;
+          int val = int.tryParse(value ?? "0") ?? 0;
           if (value == null || value.isEmpty) {
-            return "please enter a number";
+            return validate ? "please enter a number" : null;
           } else if (val > maxValue) {
             return "value must be less than $maxValue";
           } else if (val < 0) {
@@ -34,9 +37,12 @@ class NumericField extends StatelessWidget {
           }
           return null;
         },
-        onChanged:onChanged,
-        decoration:
-            InputDecoration(hintText: hintText, border: InputBorder.none),
+        onChanged: onChanged,
+        decoration: InputDecoration(
+            label: showLabel ? Text(hintText) : null,
+            hintText: hintText,
+            labelStyle: const TextStyle(fontSize: 14),
+            border: InputBorder.none),
       ),
     );
   }

@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../models/PrimaryContainer.dart';
-import '../../../../models/book.dart';
+import '../../../../widgets/PrimaryContainer.dart';
+import '../../../../widgets/book.dart';
 import '../../../../rootProvider/bookProvider.dart';
 
 
