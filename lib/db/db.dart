@@ -143,7 +143,7 @@ class DbHelper {
          WHEN NEW.trig = 1
          BEGIN
          UPDATE books
-         SET status_id = 1, reading_count = reading_count + 1
+         SET status_id = 3, reading_count = reading_count + 1
          WHERE id = NEW.book_id AND current_page = total_pages;
          UPDATE books
          SET current_page = current_page + NEW.pages_read,
@@ -185,7 +185,7 @@ BEGIN
         ELSE NEW.current_page
     END,
     status_id = CASE
-        WHEN NEW.current_page >= total_pages THEN 1
+        WHEN NEW.current_page >= total_pages THEN 3
         ELSE status_id
     END,
     reading_count = CASE

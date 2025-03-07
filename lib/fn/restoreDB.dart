@@ -30,10 +30,10 @@ Future<void> backup() async {
   //db.backup(backup, nPage: -1);
   //backup.dispose();
   File originalFile =
-      File("${(await getApplicationSupportDirectory()).path}/$kAppName.db");
+      File("${(await getApplicationSupportDirectory()).path}/hcody_$kAppName.db");
 
   originalFile
-      .copy("$pathToDownloadsDir/achievement_box/${kAppName}_backup$date.db");
+      .copy("$pathToDownloadsDir/$kAppName/${kAppName}_backup$date.db");
 }
 
 Future<void> restore(String path) async {

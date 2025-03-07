@@ -3,7 +3,7 @@
 [X] add round in stat page to 1 nu after the comma
 [X] update the shape of the add new book 
 [X] show hints for the textfeilds
-[ ] fix the backup 
+[X] fix the backup 
 [X] fix view on github
 [X] clean the un needed code
 [ ] clean commented code(un needed )
@@ -15,3 +15,4 @@
 [ ] sort books by the last reading
 [ ] add search (search in every thing) 
 [ ] adding images
+[ ] fix updating the status of the book when it finished
