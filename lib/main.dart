@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -41,11 +40,10 @@ class MyApp extends StatelessWidget {
           bool isDarkMode = db.sql.settings.getDarkMode();
           Color accentColor = context.watch<ThemeProvider>().AccentColor;
           return MaterialApp(
-              title: 'Achievement Box',
               themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
               debugShowCheckedModeBanner: false,
               theme: buildTheme(accentColor, isDarkMode),
-              home: const HomePage());
+              home:  const HomePage());
         }));
   }
 }

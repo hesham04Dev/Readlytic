@@ -16,3 +16,7 @@
 [ ] add search (search in every thing) 
 [ ] adding images
 [ ] fix updating the status of the book when it finished
+[ ] add animations
+[ ] rename app to booksbox
+[ ] add export as csv and import as csv
+[ ] in export export the images also

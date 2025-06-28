@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:readlytic/pages/EditPages/edit_books_page.dart';
 
 import '../../config/const.dart';
 import '../../db/db.dart';
@@ -12,15 +13,15 @@ import 'widget/status_drop_dwon.dart';
 // ignore: must_be_immutable
 class NewBookPage extends StatefulWidget {
   NewBookPage({super.key, this.title = "New Book"});
-  List<Widget>? actions;
+  late final List<Widget>? actions;
   final String title;
   static const int gearIconId = 39;
 
   @override
-  State<NewBookPage> createState() => NewBookPageState();
+  State<EditBooksPage> createState() => NewBookPageState();
 }
 
-class NewBookPageState extends State<NewBookPage> {
+class NewBookPageState extends State<EditBooksPage> {
   // final double rating;TODO
 
   late final TextEditingController title;

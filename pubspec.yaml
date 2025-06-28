@@ -34,9 +34,9 @@ dependencies:
   package_info_plus: ^8.1.1
   asset_icon: ^1.0.4
   #
-  audioplayers: ^6.2.0
-  just_audio: ^0.9.46
-  video_player: ^2.9.3
+  # audioplayers: ^6.2.0
+  # just_audio: ^0.9.46
+  # video_player: ^2.9.3
 
 dev_dependencies:
   flutter_test:
